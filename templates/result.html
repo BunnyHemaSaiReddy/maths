@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(to right, #dbeafe, #e0f7fa);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    .result-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1s ease;
+      text-align: center;
+    }
+
+    .result-container h1 {
+      font-size: 2rem;
+      color: #039be5;
+      margin-bottom: 25px;
+    }
+
+    .result-container p {
+      font-size: 1.2rem;
+      margin: 15px 0;
+    }
+
+    .result-container strong {
+      color: #0288d1;
+    }
+
+    .result-container button {
+      background-color: #039be5;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+      margin-right: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-container button:hover {
+      background-color: #0288d1;
+    }
+
+    form {
+      display: inline-block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .result-container {
+        padding: 25px;
+      }
+
+      .result-container p {
+        font-size: 1rem;
+      }
+
+      .result-container button {
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h1>Quiz Result</h1>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Score:</strong> {{ score }}/{{ total }}</p>
+    <p><strong>Status:</strong> {{ 'Passed ✅' if passed else 'Failed ❌' }}</p>
+
+    {% if passed %}
+    <!-- <form method="POST" action="{{ url_for('download_certificate') }}">
+      <input type="hidden" name="name" value="{{ name }}">
+      <button type="submit" >🎓 Download Certificate</button>
+    </form>  -->
+
+    <form method="POST" action="{{ url_for('certificate') }}">
+      <input type="hidden" name="name" value="{{ name }}">
+      <button type="submit">👀 View Certificate</button>
+    </form>
+    {% else %}
+    <p style="margin-top: 20px; color: #e53935;">Try again to earn your certificate!</p>
+    <button onclick="window.location.href='/enroll'">Back To Module</button>
+
+    {% endif %}
+  </div>
+</body>
+</html>

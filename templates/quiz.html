@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Final Quiz - Mathematics Course</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(to right, #dbeafe, #e0f7fa);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .quiz-container {
+      width: 80%;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: zoomIn 0.5s ease;
+    }
+
+    .quiz-container h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #039be5;
+      margin-bottom: 30px;
+      animation: slideFade 1s ease;
+    }
+
+    .question-block {
+      margin-bottom: 30px;
+      background-color: #e3f2fd;
+      border-left: 8px solid #039be5;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      animation: zoomIn 0.5s ease;
+      display: none;
+    }
+
+    .question-block p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .question-block label {
+      font-size: 1rem;
+      color: #555;
+      display: block;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .question-block input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    button[type="button"], button[type="submit"] {
+      background-color: #039be5;
+      color: white;
+      font-size: 1.2rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    button[type="button"]:hover, button[type="submit"]:hover {
+      background-color: #0288d1;
+    }
+
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .quiz-container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .question-block {
+        padding: 15px;
+      }
+
+      button[type="button"], button[type="submit"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Final Quiz</h1>
+    <form method="POST" action="/submit-quiz">
+      {% for question in questions %}
+        {% set q_index = loop.index %}
+        <div class="question-block" id="question-{{ q_index }}">
+          <p><strong>Q{{ q_index }}: {{ question.question }}</strong></p>
+          {% for option in question.options %}
+            <label>
+              <input type="radio" name="q{{ q_index }}" value="{{ option }}"> {{ option }}
+            </label><br>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      
+      <button type="button" id="nextButton" onclick="showQuestion(currentIndex + 1)">Next</button>
+      <button type="submit" id="submitButton" style="display:none;">Submit Quiz</button>
+    </form>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const questions = document.querySelectorAll('.question-block');
+    
+    function showQuestion(index) {
+      if (index >= 0 && index < questions.length) {
+        questions[currentIndex].style.display = 'none'; // Hide current question
+        questions[index].style.display = 'block'; // Show new question
+        currentIndex = index;
+      }
+      updateNavigation();
+    }
+
+    function updateNavigation() {
+      if (currentIndex === questions.length - 1) {
+        document.getElementById('nextButton').style.display = 'none';
+        document.getElementById('submitButton').style.display = 'inline-block';
+      } else {
+        document.getElementById('nextButton').style.display = 'inline-block';
+        document.getElementById('submitButton').style.display = 'none';
+      }
+    }
+
+    window.onload = () => {
+      showQuestion(currentIndex); // Show the first question by default
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mathematics Course</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* (All previous styles remain unchanged) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(to right, #dbeafe, #e0f7fa);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(to bottom, #4fc3f7, #039be5);
+      padding: 30px 20px;
+      color: white;
+      border-right: 5px solid #0288d1;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px;
+      display: block;
+      border-radius: 10px;
+      transition: all 0.3s ease-in-out;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar ul li a:hover {
+      background-color: #ffffff;
+      color: #039be5;
+      font-weight: bold;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      background: #ffffff;
+      overflow-y: auto;
+    }
+
+    .content h1 {
+      font-size: 2rem;
+      color: #039be5;
+      margin-bottom: 25px;
+      text-align: center;
+      animation: slideFade 1s ease;
+    }
+
+    .content ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .content li {
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: #e3f2fd;
+      border-left: 8px solid #039be5;
+      border-radius: 15px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+      animation: zoomIn 0.5s ease;
+    }
+
+    .content iframe {
+      margin-top: 10px;
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 10px;
+    }
+
+    .content p {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .progress {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 1rem;
+      color: white;
+    }
+
+    .progress label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    progress {
+      width: 100%;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      appearance: none;
+    }
+
+    progress::-webkit-progress-bar {
+      background-color: #eee;
+      border-radius: 10px;
+    }
+
+    progress::-webkit-progress-value {
+      background: linear-gradient(to right, #4dd0e1, #00acc1);
+      border-radius: 10px;
+    }
+
+    #progressValue {
+      display: inline-block;
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: white;
+    }
+
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 5px solid #0288d1;
+      }
+
+      .content iframe {
+        width: 100%;
+        height: 250px;
+      }
+
+      progress {
+        width: 100%;
+      }
+    }
+  </style>
+  <script>
+    function updateProgress(moduleIndex) {
+      const totalModules = 5;
+      const progress = Math.round(((moduleIndex + 1) / totalModules) * 100);
+      document.getElementById("progressBar").value = progress;
+      document.getElementById("progressValue").innerText = progress + "%";
+      localStorage.setItem("ml_progress", progress);
+
+      // Show Final Quiz button only if progress reaches 100%
+      if (progress === 100) {
+        document.getElementById("finalQuizLink").style.display = 'block';
+      }
+    }
+
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const moduleIndex = parseInt(params.get("module")) || 0;
+      updateProgress(moduleIndex);
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Modules</h2>
+      <ul>
+        {% for module in modules %}
+          <li><a href="?module={{ loop.index0 }}">Module {{ loop.index }}: {{ module.name }}</a></li>
+        {% endfor %}
+        <li id="finalQuizLink" style="display: none;">
+          <a href="/quiz">Final Quiz</a>
+        </li>
+      </ul>
+      <div class="progress">
+        <label>Course Progress:</label>
+        <progress id="progressBar" value="0" max="100"></progress>
+        <div id="progressValue">0%</div>
+      </div>
+    </aside>
+    <main class="content">
+      <h1>{{ selected_module.name }}</h1>
+      <ul>
+        {% for topic in selected_module.topics %}
+          <li><strong>{{ topic.title }}</strong><br>
+            <iframe width="560" height="315" src="{{ topic.video_url }}" frameborder="0" allowfullscreen></iframe>
+            <p>{{ topic.description }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

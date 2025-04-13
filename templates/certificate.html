@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate of Completion</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      background: #f4f4f4;
+      padding: 50px;
+    }
+    .certificate {
+      background: white;
+      padding: 40px;
+      border: 10px solid #2e86de;
+      width: 80%;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #2e86de;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .download {
+      margin-top: 20px;
+    }
+    .download button {
+      padding: 10px 20px;
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .download button:hover {
+      background-color: #1b4f72;
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate">
+    <h1>Certificate of Completion</h1>
+    <p>This is to certify that</p>
+    <p class="bold">{{ name }}</p>
+    <p>has successfully completed the course</p>
+    <p class="bold">"Mathematical Concepts"</p>
+    <p>on {{ date }}</p>
+
+    <div class="download">
+      <form method="POST" action="/download-certificate">
+        <input type="hidden" name="name" value="{{ session.get("email") }}">
+      </form>
+    </div>
+  </div>
+</body>
+</html>
