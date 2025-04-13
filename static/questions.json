@@ -1,0 +1,28 @@
+[
+  {
+    "question": "What is the HCF of 72 and 120?",
+    "options": ["12", "24", "36", "48"],
+    "answer": "24"
+  },
+  
+  {
+    "question": "What is the degree of the polynomial 5x-4y+3?",
+    "options": ["3", "2", "1", "0"],
+    "answer": "1"
+  },
+  {
+    "question": "Which of the following is a linear equation in two variables?",
+    "options": ["2x + 3 = 7", "2x + y = 25", "3x + 4y = 12", "x = 5"],
+    "answer": "3x + 4y = 12"
+  },
+  {
+    "question": "In a triangle, if the square of one side is equal to the sum of the squares of the other two sides, then the triangle is:",
+    "options": ["Equilateral", "Isosceles", "Scalene", "Right-angled"],
+    "answer": "Right-angled"
+  },
+  {
+    "question": "The mean of 5 numbers is 20. What is their total sum?",
+    "options": ["20", "100", "25", "10"],
+    "answer": "100"
+  }
+]

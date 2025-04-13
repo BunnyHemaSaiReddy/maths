@@ -1,0 +1,73 @@
+[
+    {
+      "name": "Real Numbers",
+      "topics": [
+        {
+          "title": "The Number System and Its Classification",
+          "video_url": "https://www.youtube.com/embed/hmbcF97jlv0",
+          "description": "Introduction to number systems, their types, and importance in mathematics and computing basics."
+        },
+        {
+          "title": "Fundamental Theorem of Arithmetic (Prime Factorization)",
+          "video_url": "https://www.youtube.com/embed/cXhkHzyQiqQ",
+          "description": "Learn how the Fundamental Theorem of Arithmetic shows that every number has a unique prime factorization."
+        }
+      ]
+    },
+    {
+      "name": "Polynomails",
+      "topics": [
+        {
+          "title": "Zeros of a Polynomial",
+          "video_url": "https://www.youtube.com/embed/SycTlTbyh3Y",
+          "description": "Understanding the concept and methods to find the zeros of a polynomial function."
+        },
+        {
+          "title": "Remainder Theorem & Factor Theorem",
+          "video_url": "https://www.youtube.com/embed/ZCMjEXhP78Q" ,
+          "description": "Understand the Remainder Theorem and Factor Theorem for polynomial division and roots."
+        }
+      ]
+    },
+    {
+      "name": "Linear Equations in Two Variables",
+      "topics": [
+        {
+          "title": "Introduction to Linear Equations in Two Variables",
+          "video_url": "https://www.youtube.com/embed/eVtQFWiKyyk",
+          "description": "Introduction to linear variables and their role in mathematical modeling and analysis."
+        },
+        {
+          "title": "Applications and Solution of Linear Equations",
+          "video_url": "https://www.youtube.com/embed/ichFJvMBos8",
+          "description": "Introduction to solving linear equations and their real-life applications."
+        }
+      ]
+    },
+    {
+      "name": "Triangles",
+      "topics": [
+        {
+          "title": "Similar Figures and Similar Triangles",
+          "video_url": "https://www.youtube.com/embed/rkWcJET-xxI",
+          "description": "Basics of Similar Figures and Triangles with properties and real-life applications."
+        },
+        {
+          "title": "Pythagoras Theorem & Converse",
+          "video_url": "https://www.youtube.com/embed/mZwkVHGvsDc",
+          "description": "Understanding Pythagoras Theorem and its converse with practical geometric applications."
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "topics": [
+        {
+          "title": "Statistics",
+          "video_url": "https://www.youtube.com/embed/o7WkGYIPUM8?list=PLunlGNVWDAaY7AeDDzTeu4-DD3g7zmAXs",
+          "description":"Basics of Statistics and its role in data analysis and interpretation."
+        }
+      ]
+    }
+  ]
+  
